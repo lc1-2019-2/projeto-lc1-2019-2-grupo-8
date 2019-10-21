@@ -1,4 +1,9 @@
 (radix_sort
+ (radixsort_permutes 0
+  (radixsort_permutes-1 nil 3780674051
+   ("" (expand "radixsort")
+    (("" (skeep) (("" (postpone) nil nil)) nil)) nil)
+   nil shostak))
  (radixsort_sorts_TCC1 0
   (radixsort_sorts_TCC1-1 nil 3777655189
    ("" (typepred "<<" "<=")
