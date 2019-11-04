@@ -591,7 +591,13 @@
  (|merge_sort_is_permutation| 0
   (|merge_sort_is_permutation-1| NIL 3589041194
    ("" (INDUCT "l")
-    (("1" (GRIND) NIL NIL) ("2" (SKEEP) (("2" (POSTPONE) NIL NIL)) NIL)) NIL)
+    (("1" (GRIND) NIL NIL)
+     ("2" (SKEEP)
+      (("2" (EXPAND "merge_sort")
+        (("2" (LEMMA "merge_is_permutation") (("2" (POSTPONE) NIL NIL)) NIL))
+        NIL))
+      NIL))
+    NIL)
    NIL SHOSTAK))
  (|merge_sort_works| 0
   (|merge_sort_works-1| NIL 3589041415
