@@ -1,0 +1,14 @@
+# QUESTAO 1
+
+(skeep)
+(expand "radixsort")
+(lemma "merge_sort_is_permutation[T, <<]")
+(inst -1 "merge_sort[T, <=]")
+(expand "permutations")
+(lemma "merge_sort_is_permutation[T, <=]")
+(expand "permutations")
+(inst -1 "l")
+(skeep)
+(inst?)
+(inst?)
+(replace -1 -2)
