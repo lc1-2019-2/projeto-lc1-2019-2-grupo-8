@@ -1,4 +1,4 @@
-# QUESTAO 1
+# QUESTAO 2
 
 (skeep)
 (expand "radixsort")
@@ -12,3 +12,23 @@
 (inst?)
 (inst?)
 (replace -1 -2)
+
+# QUESTAO 3
+
+(expand  "radixsort")
+(lemma merge_sort_is_sorted)
+(expand "is_sorted?")
+(skeep)
+(inst?)
+(expand "lex")
+(skeep)
+(split)		# divide a prova em duas
+(inst?)		# aqui fecha um dos lados da prova 
+(split) 	# divide a segunda árvore em 3 e fecha o caso trivial
+(inst?)
+(replace -3 -2)	# fecha o ramo 2.1
+(inst -2)
+(lemma "lex")
+(replace -4 -3)
+(lemma "merge_sort_is_sorted[T, <=]")
+(expand "is_sorted?")
