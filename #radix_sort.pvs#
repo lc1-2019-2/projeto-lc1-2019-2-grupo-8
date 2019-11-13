@@ -1,0 +1,61 @@
+%*****************************
+% Specification of Radix sort with two total preorders 
+%
+% This theory contains a formalization of Radixsort for lists[T],
+% where T is a non-interpreted type.  It sorts elements of type 
+% T by two different total pre-orders (denoted as <= and <<)
+% using as assumed stable sorting method mergesort.  The result
+% is the input list sorted by the lexicographical order built
+% from << and <=.
+%
+% Authors: Ariane Alves Almeida and Mauricio Ayala-Rincon
+%          Universidade de Brasilia
+%
+% Last modified: 30 September 2019
+%
+%*****************************
+
+radix_sort[T : TYPE, (IMPORTING total_preorder) <= : (total_preorder?[T]), (IMPORTING total_preorder) << : (total_preorder?[T]) ]   
+		: THEORY
+
+BEGIN
+
+IMPORTING sorting, mergesort
+
+
+
+% Radixsort mege-sorts a list of elements of type T by the total preorders
+% <= and << 
+ radixsort(l : list[T]) : list[T] = merge_sort[T,<<](merge_sort[T,<=](l))
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Question 2                                                 %%%
+%%%%% The second question conjectures that radixsort permutes    %%%
+%%%%% the input data, or in other words that it preserves data.  %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+ radixsort_permutes : CONJECTURE
+  FORALL(l : list[T]): permutations[T](radixsort(l), l)
+
+% Definition of the lexicographical order built from << and <= 
+ lex(x, y:T) : bool =   
+ 	(x << y AND NOT (y << x))  OR 
+	(( x << y AND y << x) AND x <= y )
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Question 3  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% The third question conjectures that radixsor inded sort.  %%%
+%%%%% Its proof is given though use of properties of the        %%%
+%%%%% mergesort algorithm, including an assumption on stability.%%%                                  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% The second lemma states that radixsort indeed sorts the input list
+% according to the total preorder lex. 
+  radixsort_sorts : CONJECTURE
+  FORALL(l : list[T]):
+   is_sorted?[T,lex](radixsort(l))
+
+  END radix_sort
